@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="cartproduct"></div>
+
+    <script>
+        window.onload = function(){
+            var data = JSON.parse(localStorage.getItem("user"))
+            var currentuser = JSON.parse(localStorage.getItem("currentuser"))
+            var cartproductdiv = document.getElementById("cartproduct")
+
+            var product;
+            for(var i=0;i<data.length; i++){
+                if(currentuser.email == data[i].email){
+                    product=data[i].cartproduct;
+                }
+            }
+
+            var finaldata ;
+            for(var i=0;i<product.length;i++){
+                finaldata += `<div>
+                    <img src="${product[i].pimage}"/>
+                    <h3>${product[i].pname}</h3>
+                    <h3>${product[i].pcategory}</h3>
+                    <h3>${product[i].pprice}</h3>
+                    </div>`
+
+                    cartproductdiv.innerHTML = finaldata;
+            }
+        }
+    </script>
+</body>
+</html>

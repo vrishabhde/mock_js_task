@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>add product here</h1>
+    <!-- <div id="mproduct"></div> -->
+    <form onsubmit="addproduct(event)">
+        <input type="text" placeholder="product name" id="pname" /></br></br>
+        <input type="text" placeholder="product category" id="pcategory" /></br></br>
+        <input type="text" placeholder="product image" id="pimage" /></br></br>
+        <input type="number" placeholder="product price" id="pprice" /></br></br>
+        <input type="submit" value="submit" />
+    </form>
+
+    <script>
+        function addproduct(event) {
+            event.preventDefault();
+
+            var pname = document.getElementById("pname").value;
+            var pcategory = document.getElementById("pcategory").value;
+            var pimage = document.getElementById("pimage").value;
+            var pprice = document.getElementById("pprice").value;
+
+            var product = { pname, pcategory, pprice, pimage };
+
+            var ls = JSON.parse(localStorage.getItem("multipleproduct")) || [];
+           
+                ls.push(product);
+
+                localStorage.setItem("multipleproduct", JSON.stringify(ls));
+                alert("product added successfully")
+                window.location.href = './home.html';
+                document.getElementById("pname").value = "";
+                document.getElementById("pcategory").value = "";
+                document.getElementById("pimage").value = "";
+                document.getElementById("pprice").value = "";
+            }
+        
+    </script>
+
+
+</body>
+
+</html>

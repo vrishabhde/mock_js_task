@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="singleproduct"></div>
+
+    <script>
+        window.onload = function () {
+
+            var singleproductdiv = document.getElementById("singleproduct")
+            var sproduct = JSON.parse(localStorage.getItem("multipleproduct"))
+            for (var i = 0; i < sproduct.length; i++) {
+                var structure = `<div id="sp">
+                <img src="${sproduct[i].pname}"/>
+                <h3>${sproduct[i].pprice}</h3>
+                <button onclick="addcart(${JSON.stringify(sproduct)})>add to cart</button>
+                </div>`;
+
+                singleproductdiv.innerHTML = structure;
+            }
+
+
+
+        }
+        function addcart(sproduct) {
+
+            var data = JSON.parse(localStorage.getItem("user"))
+            var currentuser = JSON.parse(localStorage.getItem("currentuser"))
+            for (var i = 0; i < data.length; i++) {
+                if (currentuser.email == data[i].email) {
+                    if (data[i].cartproduct == undefined) {
+                        data[i].cartproduct = [sproduct]
+                    } else {
+                        data[i].cartproduct.push(sproduct)
+                    }
+                }
+            }
+            localStorage.setItem("user", JSON.stringify(sproduct))
+            alert("product added to cart");
+            window.location.href = "./cart.html"
+        }
+    </script>
+</body>
+
+</html>

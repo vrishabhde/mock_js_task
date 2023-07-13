@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Home</h1>
+    <h2 id="username"></h2>
+    <div id="login">
+        <button onclick="window.location.href='./login.html'">Login</button>
+        <button onclick="window.location.href='./login.html'">Logout</button>
+    </div>
+    <div id="logout"></div>
+
+
+    <div id="mproduct"></div>
+    <script>
+        window.onload = function () {
+
+            var logindiv = document.getElementById("login");
+            var logoutdiv = document.getElementById("logout");
+            var currentuser = JSON.parse(localStorage.getItem("currentuser"));
+            if (currentuser) {
+                var name = `<h3>${currentuser.name}</h3>`;
+                var button = `<button onclick="logout()">logout</button>`;
+
+                logindiv.innerHTML = name;
+                logoutdiv.innerHTML = button;
+            }
+        }
+        function logout() {
+            localStorage.removeItem("currentuser");
+            alert("logout success");
+            window.location.reload();
+        }
+    </script>
+
+<script>
+    window.onload = function(){
+        var mproductdiv = document.getElementById("mproduct");
+        var productfromls = JSON.parse(localStorage.getItem("multipleproduct"))
+     
+        var finaldata;
+        for(var i=0;i<productfromls.length;i++){
+            finaldata += `<div onclick='redirect(${JSON.stringify(productfromls[i])})' id="sp">
+                <img src="${productfromls[i].pimage}"/>
+                <h3>${productfromls[i].pname}</h3>
+                <h3>${productfromls[i].pprice}</h3>
+                <h3>${productfromls[i].pcategory}</h3>
+                </div>`
+
+                mproductdiv.innerHTML = finaldata;
+                username.innerHTML = name;   
+
+        }
+    }
+
+
+    function redirect(para){
+        localStorage.setItem("singleproduct", JSON.stringify(para));
+        window.location.href = './singleproduct.html';
+        
+    }
+</script>
+</body>
+
+</html>
